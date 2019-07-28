@@ -1,8 +1,8 @@
 # xiaomiapp
 #项目一：电商混合app（结合数据保密加密缓存等特性）
   #1.后端：
-  # 用到的技术: node.js ,express框架,非对称加密rsa,数据库mysql,缓存redis,
-  # 项目描述:  利用npm，框架express，建立项目,与数据库连接,修改路由模块，在路由用拦截器拦截进行加密，用redis建立缓存连接以及设置超时时间。
+  #  node.js ,express框架,非对称加密rsa,数据库mysql,缓存redis,
+  # 利用npm，框架express，建立项目,与数据库连接,修改路由模块，在路由用拦截器拦截进行加密，用redis建立缓存连接以及设置超时时间。
 #2. 前端数据加密token中，利用axios的请求拦截进行加密向后端传，后端传入前端在响       应拦截进行解密。是别人更加难已破解。
 # 3.前端：
      #用到的技术: vue , vuex, vue-router , ydui,路由懒加载,axios ，keep-alive等,

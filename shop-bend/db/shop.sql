@@ -1,0 +1,15 @@
+drop database if exists shop;
+show databases;
+create database shop charset=utf8;
+show databases;
+use shop;
+create table shop(id int primary key auto_increment, name varchar(10),number varchar(120)) default charset=utf8;
+create table shoptext(id varchar(10),shop_title varchar(20),shop_newprice varchar(20),shop_oldprice varchar(20),shop_kucun varchar(20),shop_img varchar(120)) default charset=utf8;
+desc shop;
+insert into shop values(null, "鞋子",'32');
+insert into shoptext values( 1,"小米cc9",'1999','3200','5435','https://i8.mifile.cn/a1/pms_1562056098.23244336.jpg');
+insert into shoptext values( 2,"小米8",'1799','2200','432','https://i8.mifile.cn/a1/pms_1538019009.57772743.png');
+insert into shoptext values( 3,"小米MIX3",'2999','4800','543','https://i8.mifile.cn/a1/pms_1540429657.72395987.jpg');
+insert into shoptext values( 4,"Redmi K20Pro",'2999','3200','335','https://i8.mifile.cn/a1/pms_1558857678.14769305.jpg');
+insert into shop values(null, "袜子",'54');
+select * from shoptext;	

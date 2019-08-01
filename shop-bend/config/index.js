@@ -25,17 +25,24 @@ const config ={
     },
     sql:{
         shop:{
-              info:'select * from shoptext where id =?',
-              index:'select * from shoptext ORDER BY id DESC limit ?,?'
+              homeinfo:'select * from shoptext where Sid =?',
+              shopsider:'select * from shopslider where id =?',
+              index:'select * from shoptext ORDER BY Sid DESC limit ?,?',
+              list:'select * from shop ORDER BY id DESC limit ?,?'
         },
         cart:{
-
+             index:"select * from shopcar ORDER BY id ASC limit ?,?",
+             addcar:'insert into shopcar'+'(shop_title,shop_newprice,shop_number,shop_img) values (?,?,?,?)'
         },
         order:{
 
         },
         user:{
-
+            // shiyisi***********************
+            user1:"select * from users where user_name =? and user_pwd =?",
+            //shiyishi***********************
+            user:"select * from users where user_name =?",
+            adduser:'insert into users'+'(user_name,user_nike,user_pwd) values (?,?,?)'
         }
     }
 }

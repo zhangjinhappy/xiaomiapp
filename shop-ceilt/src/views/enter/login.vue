@@ -1,6 +1,6 @@
 <template>
    <div class="logo">
-      <users></users>
+      <users :title="title"></users>
        <yd-cell-group>
             <yd-cell-item>
                 <yd-input slot="right" class="input" ref="phone" required v-model="input1" regex="mobile" placeholder="手机号"></yd-input>
@@ -19,27 +19,50 @@
 </template>
 <script>
 import users from '@/components/enter/userheader.vue'
+import storage from '../../utils/storage'
 export default {
      data(){
        return{
-          input1:'',
-          input2:""
+          input1:this.$store.state.UsersPage.login.input1,
+          input2:this.$store.state.UsersPage.login.input2,
+          title:"登录"
        }
      },
      methods:{
        clickname(){
-
+            if(this.$refs.phone.valid && this.$refs.pwd.valid){
+                 var params={
+                      pwd:this.input2,
+                      name:this.input1,
+                   }
+                 this.$axios.post({
+                          url:"user/login",
+                          token: this.$utils.encrypt(params)
+                        },(res)=>{
+                            console.log(res)
+                            var list = res.data.data
+                            if(list==="数据不存在"){
+                              alert(list)
+                            }else{
+                              storage.setLocation("user",list[0])
+                              this.$dialog.toast({
+                                              mes:"chenggong",
+                                              timeout:1500
+                                          })
+                                 }
+                              this.$router.replace({name:'home'})
+                        })
+            }else{
+               this.$dialog.toast({
+                   mes:"bu wei kong",
+                   timeout:1500
+               })
+            }
        }
      },
-    beforeRouteEnter (to, from, next) {
-        next(vm =>{
-           vm.$parent.$data.showfooter=false
-        })
-    },
-   beforeRouteLeave (to, from, next) {
-            this.$parent.$data.showfooter=true
-           next()
-    },
+   created(){
+    this.$store.state.appPage.showfooter = false
+   },
    components:{
      users
    }

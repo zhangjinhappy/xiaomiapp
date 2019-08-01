@@ -1,7 +1,7 @@
 <template>
    <div class="headerbar">
       <yd-navbar :title="title" fixed>
-          <router-link to="#" slot="left">
+          <router-link to="" slot="left" @click.native="go()">
               <yd-navbar-back-icon></yd-navbar-back-icon>
           </router-link>
           <router-link to="#" slot="right">
@@ -15,6 +15,11 @@ export default {
     data(){
       return{
 
+      }
+    },
+    methods:{
+      go(){
+        this.$router.go(-1)
       }
     },
     props:{

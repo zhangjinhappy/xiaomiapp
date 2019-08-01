@@ -13,7 +13,7 @@ export default {
 <style lang="less" scoped>
 .landing-bubbles{
     background: #777777;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     right: 0;

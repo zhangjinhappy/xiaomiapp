@@ -30,7 +30,7 @@ export default {
    .title{
      width: 100%;
      height: .8rem;
-     background-color:#EFEFF4;
+     background-color:#fff;
      display: flex;
      align-items: center;
      padding-left:.1rem ;

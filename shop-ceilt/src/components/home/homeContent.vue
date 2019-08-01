@@ -1,17 +1,17 @@
 <template>
   <div class="context">
     <yd-list theme="3">
-        <yd-list-item >
-            <img slot="img" src="//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg"/>
-            <span slot="title">标题111标题标题标题标题111标题标题标题标题111标题标题标题标题111标题标题标题</span>
+        <yd-list-item v-for="(item,key) in $store.state.homePage.homelist" :key="key" @click.native="shopDetail(item.id)">
+            <img slot="img" v-lazy="item.shop_img"/>
+            <span slot="title">{{item.shop_title}}</span>
             <yd-list-other slot="other">
                 <div class="top">
-                    <span class="demo-price"><em>¥</em>2344</span>
-                    <del class="demo-del-price">¥3455</del>
+                    <span class="demo-price"><em>¥</em>{{item.shop_newprice}}</span>
+                    <del class="demo-del-price">¥{{item.shop_oldprice}}</del>
                 </div>
                 <div class="bottom">
-                    <div class="demo-active">优惠活动</div>
-                    <div class="demo-you">包邮</div>
+                    <div class="demo-active">{{item.active==1?'优惠活动':"非优惠活动"}}</div>
+                    <div class="demo-you">{{item.you==0?"包邮":"非包邮"}}</div>
                 </div>
             </yd-list-other>
         </yd-list-item>
@@ -20,16 +20,12 @@
 </template>
 <script>
 export default {
-    data(){
-      return{
-        list:[{id:1,img: "//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg", title: "标题111标题标题标题标题", price: 156.23, w_price: 89.36},
-              {id:2,img: "//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg", title: "标题111标题标题标题标题", price: 156.23, w_price: 89.36},
-              {id:3,img: "//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg", title: "标题111标题标题标题标题", price: 156.23, w_price: 89.36},
-              {id:4,img: "//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg", title: "标题111标题标题标题标题", price: 156.23, w_price: 89.36},
-              {id:5,img: "//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg", title: "标题111标题标题标题标题", price: 156.23, w_price: 89.36},
-        ]
-      }
+  methods:{
+    shopDetail(sid){
+      this.$router.push({name:"shoplist",params:{sid}})
+      this.$store.dispatch("initShopDetail",sid)
     }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -60,6 +56,9 @@ export default {
      margin-left: .1rem;
      font-size: .16rem;
    }
+}
+img{
+  background-color: #ffffff;
 }
 </style>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="mine">
-    <users></users>
+    <users :title="title"></users>
     <mine-index/>
   </div>
 </template>
@@ -10,8 +10,11 @@ import mineIndex from '@/components/mine/index.vue'
 export default {
      data(){
       return{
-         title:"个人中心"
+         title:"登录/注册"
       }
+    },
+     created(){
+      this.$store.state.appPage.showfooter = true
     },
     components:{
       users,

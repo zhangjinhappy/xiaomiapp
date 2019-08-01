@@ -1,6 +1,6 @@
 const utils = require('./index')
-var a ={
-    id:1,
-    name:"zhangjin"
+var page ={
+
+   
 }
-console.log(utils.encrypt(a))
+console.log(utils.encrypt(page))

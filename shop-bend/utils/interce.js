@@ -11,7 +11,6 @@ module.exports ={
             }
             else{
                 let data = await cache.Get(req.url)
-                console.log(data)
                 res.json({
                     status: config.dev.api.success, 
                     msg:"缓存读取",

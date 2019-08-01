@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue';
-import {Toast} from 'vue-ydui/dist/lib.rem/dialog';
+import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
 import utils from '../utils/utils'
 
 axios.defaults.baseURL = '/api';
@@ -18,8 +18,8 @@ axios.interceptors.request.use(config =>{
 
 // 添加响应拦截器
 axios.interceptors.response.use(response => {
-  // console.log(response)
-   response.data.data = JSON.parse(utils.private_decrypted(response.data.data))
+     Loading.open('Loading......');
+   response.data.msg? response=response:response.data.data = JSON.parse(utils.private_decrypted(response.data.data))
   return response;
 }, error =>{
   // 对响应错误做点什么
@@ -32,8 +32,10 @@ export default {
        axios.defaults.headers.common['token'] = params.token;
        axios.get(params.url)
        .then(success =>{
-           console.log(success)
-           callback(success)
+              setTimeout(() => {
+                Loading.close();
+                }, 2000);
+           callback(success.data)
        })
        .catch(error =>{
         Toast({
@@ -45,12 +47,16 @@ export default {
    },
   //post 请求
   post (params,callback){
-    axios.post(params.url,params.bar)
+    axios.defaults.headers.common['token'] = params.token;
+    axios.post(params.url,params.token)
     .then(response =>{
+          setTimeout(() => {
+            Loading.close();
+            }, 2000);
         callback(response)
     })
     .catch(error =>{
-     Toast({
+      Toast({
          position: 'top',
          time: 200,
          message: "get 请求失败"

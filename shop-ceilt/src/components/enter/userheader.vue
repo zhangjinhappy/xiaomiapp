@@ -1,6 +1,8 @@
 <template>
     <div class="me-header">
-       <img class="user-logo" src="https://m.mi.com/static/img/avatar.76a75b8f17.png" alt="">
+       <img class="user-logo" v-if="title === '登录'"  src="https://m.mi.com/static/img/avatar.76a75b8f17.png" alt="">
+       <img class="user-logo" v-if="title === '注册'" src="http://p19.qhimgs3.com/dr/240_240_70/t013c03eef197d3f06d.jpg?t=1547786924" style="border-radius: 50%;" alt="">
+        <img class="user-logo" v-if="title === '登录/注册'"  src="https://m.mi.com/static/img/avatar.76a75b8f17.png" alt="">
        <p>{{title}}</p>
     </div>
 </template>

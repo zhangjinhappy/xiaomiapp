@@ -13,6 +13,9 @@ export default {
          title:"购物车"
       }
     },
+    created(){
+      this.$store.dispatch("initCar")
+    },
     components:{
       Navbar,
       carIndex

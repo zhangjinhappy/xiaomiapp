@@ -2,8 +2,8 @@
   <div id="app">
 
         <router-view/>
-      <Tabbar v-if ="showfooter" />
-      <layout :loading="$store.state.pageLoad"/>
+      <Tabbar v-if ="$store.state.appPage.showfooter" />
+      <layout :loading="$store.state.appPage.pageLoad"/>
   </div>
 </template>
 <script>
@@ -13,11 +13,6 @@ export default {
     name:'app',
     beforeMount(){
         this.$store.dispatch('initApp')
-      },
-      data(){
-        return{
-          showfooter:true
-        }
       },
     components:{
        Tabbar,

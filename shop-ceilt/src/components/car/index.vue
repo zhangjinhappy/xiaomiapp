@@ -1,45 +1,26 @@
 <template>
    <div class="car">
-       <div class="img" v-if="showCar">
+       <div class="img" v-if="!$store.state.cartPage.showCar">
             <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2145208668,1958297527&fm=26&gp=0.jpg" alt="111">
             <h1>购物车还是空的</h1>
             <i>去逛逛</i>
        </div>
-       <div class="shop">
-             <yd-checklist v-model="checklist4" :label="false">
-                    <yd-checklist-item val="aaa">
+       <div class="shop" >
+             <yd-checklist v-model="$store.state.cartPage.checklist4" :label="false">
+                    <yd-checklist-item :val="JSON.stringify(item)" v-for="item in shoplist" :key="item.id">
                         <yd-flexbox style="padding: .15rem;">
-                            <img src="//img12.360buyimg.com/n1/jfs/t2122/170/1006550413/171711/de099a6f/56399d01N67907749.jpg" class="demo-checklist-img">
+                            <img v-lazy="item.shop_img" class="demo-checklist-img">
                             <yd-flexbox-item align="top" class="shop-content">
-                                <div class="title">点击这边的内容是</div>
-                                <span class="shop-message">点击这边的内容是禁止选中的</span>
+                                <div class="title">{{item.shop_title}}</div>
+                                 <!-- <span class="shop-message">{{$store.state.cartPage.shoplist}}</span> -->
                                  <div class="shop-btn">
-                                         <div class="plus" @click="plusShop(i)">-</div>
-                                          <div class="number">1</div>
-                                          <div class="reduce" @click="reduceShop(i)">+</div>
+                                         <div class="plus" @click="plusShop(item.id)">-</div>
+                                          <div class="number">{{item.shop_number}}</div>
+                                          <div class="reduce" @click="reduceShop(item.id)">+</div>
                                  </div>
                                 <div class="bottom">
-                                     <span style="color:red;">单价格:￥<em>3437</em></span>
-                                      <span  style="color:red"> 小计:&nbsp;343455元</span>
-                                      <yd-icon name="delete" size='.42rem'></yd-icon>
-                                </div>
-                            </yd-flexbox-item>
-                        </yd-flexbox>
-                    </yd-checklist-item>
-                    <yd-checklist-item val="bbb">
-                        <yd-flexbox style="padding: .15rem;">
-                            <img src="//img12.360buyimg.com/n1/jfs/t2122/170/1006550413/171711/de099a6f/56399d01N67907749.jpg" class="demo-checklist-img">
-                            <yd-flexbox-item align="top" class="shop-content">
-                                <div class="title">点击这边的内容是</div>
-                                <span class="shop-message">点击这边的内容是禁止选中的</span>
-                                 <div class="shop-btn">
-                                         <div class="plus" @click="plusShop(i)">-</div>
-                                          <div class="number">1</div>
-                                          <div class="reduce" @click="reduceShop(i)">+</div>
-                                 </div>
-                                <div class="bottom">
-                                     <span style="color:red;">单价格:￥<em>3437</em></span>
-                                      <span  style="color:red"> 小计:&nbsp;343455元</span>
+                                     <span style="color:red;">单价格:￥<em>{{item.shop_newprice}}</em></span>
+                                      <span  style="color:red"> 小计:&nbsp;{{item.shop_newprice*item.shop_number}}元</span>
                                       <yd-icon name="delete" size='.42rem'></yd-icon>
                                 </div>
                             </yd-flexbox-item>
@@ -47,29 +28,35 @@
                     </yd-checklist-item>
            </yd-checklist>
        </div>
+       <footer-text v-if="$store.state.cartPage.showCar"/>
    </div>
 </template>
 <script>
+import footerText from './footer'
 export default {
-    data(){
-      return{
-         showCar:false,
-         checklist4: []
-      }
+   computed:{
+     shoplist(){
+       return this.$store.state.cartPage.shoplist
+     }
+   },
+    created(){
+       console.log(this.$store.state.cartPage.shoplist)
+
     },
     methods:{
+
       delectshop(){
 
       },
       plusShop(i){
-
+       this.$store.state.cartPage.shoplist[i-1].shop_number == 1? '':this.$store.state.cartPage.shoplist[i-1].shop_number--
       },
       reduceShop(i){
-
+       this.$store.state.cartPage.shoplist[i-1].shop_number++
       }
     },
    components:{
-
+    footerText
    }
 }
 </script>

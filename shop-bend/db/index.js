@@ -16,7 +16,7 @@ class DB {
     query(sql='',par=[]){
         return new Promise((resolve,reject) =>{
         this.db.query(sql,par,function(error,results,fields){
-            //console.log(results)
+            // console.log(results)
             if(error) reject (error);
             results.length==0?resolve({
              status:config.dev.api.error,

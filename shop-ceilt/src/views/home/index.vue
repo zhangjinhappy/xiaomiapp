@@ -13,6 +13,9 @@ export default {
          title:"首页"
       }
     },
+    created(){
+      this.$store.state.appPage.showfooter = true
+    },
     components:{
       Navbar,
       sider
